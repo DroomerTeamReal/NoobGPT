@@ -112,7 +112,7 @@
   </style>
 </head>
 <body>
-  <header>✨ NoobGPT - Fremium</header>
+  <header>✨ NoobGPT - Lua, C#, C++ Code Assistant</header>
   <div id="chatbox"></div>
   <div id="typing"></div>
   <div id="inputArea">
@@ -122,36 +122,11 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
   <script>
-
-   document.addEventListener("keydown", function(e) {
-      if (
-        e.key === "F12" 
-        (e.ctrlKey && e.shiftKey && (e.key === "I"  e.key === "J"  e.key === "C"  e.key === "U"))
-      ) {
-        window.location.href = "https://bigrat.monster/";
-      }
-    });
-
-    let devtools = { open: false };
-    const threshold = 160;
-    setInterval(() => {
-      const widthThreshold = window.outerWidth - window.innerWidth > threshold;
-      const heightThreshold = window.outerHeight - window.innerHeight > threshold;
-      if (widthThreshold || heightThreshold) {
-        if (!devtools.open) {
-          devtools.open = true;
-          for (let i = 0; i < 12; i++) window.location.href = "https://bigrat.monster/";
-        }
-      } else {
-        devtools.open = false;
-      }
-    }, 500);
-    
     const chatbox = document.getElementById('chatbox');
     const typingEl = document.getElementById('typing');
     const userInput = document.getElementById('userInput');
     const sendBtn = document.getElementById('sendBtn');
-    const API_KEY = 'AIzaSyAuX5NnHKwPwJiiMfgdEz-_x8E1kQf5P5k';
+    const API_KEY = 'YOUR_API_KEY_HERE';
 
     function appendMessage(sender, content) {
       const msg = document.createElement('div');
@@ -228,10 +203,34 @@
       }
     });
 
-    // Init highlight.js
     document.addEventListener("DOMContentLoaded", () => {
       hljs.highlightAll();
     });
+
+    // Anti-devtools
+    document.addEventListener("keydown", function(e) {
+      if (
+        e.key === "F12" ||
+        (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J" || e.key === "C" || e.key === "U"))
+      ) {
+        window.location.href = "https://bigrat.monster/";
+      }
+    });
+
+    let devtools = { open: false };
+    const threshold = 160;
+    setInterval(() => {
+      const widthThreshold = window.outerWidth - window.innerWidth > threshold;
+      const heightThreshold = window.outerHeight - window.innerHeight > threshold;
+      if (widthThreshold || heightThreshold) {
+        if (!devtools.open) {
+          devtools.open = true;
+          for (let i = 0; i < 12; i++) window.location.href = "https://bigrat.monster/";
+        }
+      } else {
+        devtools.open = false;
+      }
+    }, 500);
   </script>
 </body>
 </html>

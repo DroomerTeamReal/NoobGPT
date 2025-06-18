@@ -58,7 +58,6 @@ end
 
 print("\n")
 
-print("UNC Environment Check")
 print("✅ - Pass, ⛔ - Fail, ⏺️ - No test, ⚠️ - Missing aliases\n")
 
 task.defer(function()

@@ -78,11 +78,12 @@ task.defer(function()
 	print("⛔ " .. fails .. " tests failed")
 	print("📨 User-Agent:", identifyexecutor())
 	print("📨 Identity:", getidentity())
-
+       
 	-- Write to files
+        writefile("nUNC/nUNC.txt", "✅ Tested with a " .. rate .. "% success rate (" .. outOf .. ")")
+        writefile("nUNC/failes.txt", "⛔ " .. fails .. " tests failed")
 	writefile("nUNC/identity.txt", tostring(getidentity()))
-	writefile("nUNC/name.txt", tostring(identifyexecutor()))
-	writefile("nUNC/nUNC.txt", "✅ Tested with a " .. rate .. "% success rate (" .. outOf .. ")")
+        writefile("nUNC/name.txt", tostring(identifyexecutor()))
 end)
 
 print("Testing Loadstring Simple...")

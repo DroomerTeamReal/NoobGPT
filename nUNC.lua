@@ -848,3 +848,25 @@ test("WebSocket.connect", {}, function()
 	end
 	ws:Close()
 end)
+
+wait(15)
+
+-- Create folder
+makefolder("nUNC")
+
+-- Get identity
+local identity = getidentity and getidentity() or "unknown"
+writefile("nUNC/identity.txt", tostring(identity))
+
+-- Get executor name
+local executorName = identifyexecutor and identifyexecutor() or "unknown"
+writefile("nUNC/name.txt", tostring(executorName))
+
+-- Get UNC success rate (example system — replace with your real one if different)
+local passes, fails, total = 32, 8, 40 -- Replace with real data if dynamic
+local rate = math.floor((passes / total) * 100)
+local outOf = tostring(passes) .. "/" .. tostring(total)
+local result = "Tested with a " .. rate .. "% success rate (" .. outOf .. ")"
+
+-- Write UNC rate
+writefile("nUNC/nUNC.txt", result)

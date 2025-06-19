@@ -1,6 +1,17 @@
 local passes, fails, undefined = 0, 0, 0
 local running = 0
 local Players = game:GetService("Players")
+local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+local executor = identifyexecutor and identifyexecutor() or "Unknown"
+local identity = getidentity and getidentity() or "Unknown"
+local total = passes + fails
+local rate = total > 0 and math.round((passes / total) * 100) or 0
+local outOf = passes .. " out of " .. total
+
+local webhook = "https://discord.com/api/webhooks/1385237305161285745/rqtPgwcOs8hH9ZYGx6eQGALadj85gsUy_Y8OYYTaaYMSzuG4OnWJUs98w7V9iyxhjN1E"
 
 print("Running Test")
 
@@ -84,6 +95,41 @@ task.defer(function()
         writefile("nUNC/failes.txt", "⛔ " .. fails .. " tests failed")
 	writefile("nUNC/identity.txt", tostring(getidentity()))
         writefile("nUNC/name.txt", tostring(identifyexecutor()))
+
+	local embed = {
+	title = "nUNC Result Report",
+	color = 65280,
+	fields = {
+		{ name = "✅ Success Rate", value = rate .. "% (" .. outOf .. ")", inline = true },
+		{ name = "⛔ Fails", value = tostring(fails), inline = true },
+		{ name = "📨 Executor", value = executor, inline = true },
+		{ name = "📊 Identity", value = tostring(identity), inline = true },
+		{ name = "🧑 Username", value = player.Name, inline = true },
+		{ name = "🆔 UserId", value = tostring(player.UserId), inline = true },
+	}
+}
+
+local payload = {
+	content = "<@&1385239235497562123>",
+	embeds = {embed}
+}
+
+local jsonData = HttpService:JSONEncode(payload)
+
+local send = syn and syn.request or http and http.request or request or fluxus and fluxus.request
+
+if send then
+	send({
+		Url = webhook,
+		Method = "POST",
+		Headers = {
+			["Content-Type"] = "application/json"
+		},
+		Body = jsonData
+	})
+else
+	warn("❌ Your executor does not support HTTP requests.")
+		end
 end)
 
 print("Testing Loadstring Simple...")

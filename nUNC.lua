@@ -60,6 +60,12 @@ print("\n")
 
 print("✅ - Pass, ⛔ - Fail, ⏺️ - No test, ⚠️ - Missing aliases\n")
 
+-- Create folder
+makefolder("nUNC")
+
+-- Your tests would update `passes`, `fails`, and `running` somewhere here...
+
+-- Deferred UNC result writing
 task.defer(function()
 	repeat task.wait() until running == 0
 
@@ -69,9 +75,15 @@ task.defer(function()
 	print("\n")
 	print("nUNC Test")
 	print("✅ Tested with a " .. rate .. "% success rate (" .. outOf .. ")")
-  print("⛔ " .. fails .. " tests failed")
-  print("📨 User-Agent:", identifyexecutor())
-  print("📨 Identity:", getidentity())
+	print("⛔ " .. fails .. " tests failed")
+	print("📨 User-Agent:", identifyexecutor())
+	print("📨 Identity:", getidentity())
+
+	-- Write to files
+	writefile("nUNC/identity.txt", tostring(getidentity()))
+	writefile("nUNC/name.txt", tostring(identifyexecutor()))
+	writefile("nUNC/WhatName.txt", tostring(whatexecutor()))
+	writefile("nUNC/nUNC.txt", "✅ Tested with a " .. rate .. "% success rate (" .. outOf .. ")")
 end)
 
 print("Testing Loadstring Simple...")
@@ -848,25 +860,3 @@ test("WebSocket.connect", {}, function()
 	end
 	ws:Close()
 end)
-
-wait(15)
-
--- Create folder
-makefolder("nUNC")
-
--- Get identity
-local identity = getidentity and getidentity() or "unknown"
-writefile("nUNC/identity.txt", tostring(identity))
-
--- Get executor name
-local executorName = identifyexecutor and identifyexecutor() or "unknown"
-writefile("nUNC/name.txt", tostring(executorName))
-
--- Get UNC success rate (example system — replace with your real one if different)
-local passes, fails, total = 32, 8, 40 -- Replace with real data if dynamic
-local rate = math.floor((passes / total) * 100)
-local outOf = tostring(passes) .. "/" .. tostring(total)
-local result = "Tested with a " .. rate .. "% success rate (" .. outOf .. ")"
-
--- Write UNC rate
-writefile("nUNC/nUNC.txt", result)

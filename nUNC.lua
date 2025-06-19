@@ -82,7 +82,6 @@ task.defer(function()
 	-- Write to files
 	writefile("nUNC/identity.txt", tostring(getidentity()))
 	writefile("nUNC/name.txt", tostring(identifyexecutor()))
-	writefile("nUNC/WhatName.txt", tostring(whatexecutor()))
 	writefile("nUNC/nUNC.txt", "✅ Tested with a " .. rate .. "% success rate (" .. outOf .. ")")
 end)
 

@@ -11,7 +11,7 @@ local total = passes + fails
 local rate = total > 0 and math.round((passes / total) * 100) or 0
 local outOf = passes .. " out of " .. total
 
-local webhook = "https://discord.com/api/webhooks/1385237305161285745/rqtPgwcOs8hH9ZYGx6eQGALadj85gsUy_Y8OYYTaaYMSzuG4OnWJUs98w7V9iyxhjN1E"
+local webhook = "https://discord.com/api/webhooks/1386553982503096320/JCcQpZ7fgP_gZJy-DpxXC7S8yQv_rqOnVhQ9Wnco4Z5zIiQb8ATcohukavSpRrWTs2rs"
 
 print("Running Test")
 
